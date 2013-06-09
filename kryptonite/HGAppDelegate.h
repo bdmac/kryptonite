@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface HGAppDelegate : UIResponder <UIApplicationDelegate>
+@interface HGAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+- (void)startSignificantChangeUpdates;
 
 @end

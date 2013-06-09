@@ -7,6 +7,7 @@
 //
 
 #import "HGViewController.h"
+#import "HGAppDelegate.h"
 
 @interface HGViewController ()
 
@@ -17,7 +18,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    if ([UIScreen mainScreen].bounds.size.height == 568) {
+        self.welcomeImage.image = [UIImage imageNamed:@"Default-568h"];
+    } else {
+        self.welcomeImage.image = [UIImage imageNamed:@"Default"];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [(HGAppDelegate*)[[UIApplication sharedApplication] delegate] startSignificantChangeUpdates];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
 }
 
 - (void)didReceiveMemoryWarning

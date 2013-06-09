@@ -10,4 +10,5 @@
 
 @interface HGViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *welcomeImage;
 @end
