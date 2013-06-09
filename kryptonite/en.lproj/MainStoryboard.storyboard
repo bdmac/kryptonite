@@ -81,7 +81,7 @@
                                 </cells>
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-LI-56g"/>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your location is used to alert you of nearby crimes and assist investators." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Z9-gzb">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your location is used to alert you of nearby crimes and assist investigators." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Z9-gzb">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="zpk-eO-UCQ"/>
                                 </constraints>
