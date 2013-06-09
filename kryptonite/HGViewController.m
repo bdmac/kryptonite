@@ -72,7 +72,7 @@
 }
 
 - (void)handleIncidentPush:(NSDictionary *)info {
-    NSLog(@"Got a push notification in foreground: %@", info);
+    NSLog(@"Got a push notification: %@", info);
     NSString *message = [[info objectForKey:@"aps"] objectForKey:@"alert"];
     NSString *referenceId = [info objectForKey:@"reference_id"];
     NSString *phoneNumber = [info objectForKey:@"phone_number"];
@@ -82,8 +82,8 @@
         phoneNumber = [formatter stringForObjectValue:phoneNumber];
         NSError *error;
         [formatter getObjectValue:&rawPhone forString:phoneNumber errorDescription:&error];
-        message = [NSString stringWithFormat:@"%@ You appeared to be nearby at that time. If you have information reference #%@", message, referenceId];
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Respond to Incident?"
+        message = [NSString stringWithFormat:@"%@\n\nYou appear to have been nearby. If you have information reference #%@.", message, referenceId];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Law Enforcement Request"
                                                        message:message];
         [alert addButtonWithTitle:[NSString stringWithFormat:@"Call %@", phoneNumber] block:^{
             NSString *stringURL = [NSString stringWithFormat:@"tel:%@", rawPhone];
@@ -102,7 +102,8 @@
     else {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Incident Alert"
                                                        message:message];
-        [alert setCancelButtonWithTitle:@"OK" block:nil];
+        [alert setCancelButtonWithTitle:@"Thanks!" block:nil];
+        [alert show];
     }
 }
 
@@ -122,6 +123,8 @@
               location.coordinate.longitude);
         PFObject *pfLocation = [PFObject objectWithClassName:@"Location"];
         [pfLocation setObject:[PFGeoPoint geoPointWithLocation:location] forKey:@"location"];
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        [pfLocation setObject:currentInstallation.installationId forKey:@"installation_id"];
         [pfLocation saveInBackground];
     }
 }
