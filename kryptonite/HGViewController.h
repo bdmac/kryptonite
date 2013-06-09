@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface HGViewController : UIViewController
-
+@interface HGViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *welcomeImage;
 @end

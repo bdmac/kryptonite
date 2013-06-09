@@ -9,7 +9,10 @@
 #ifndef kryptonite_HGConstants_h
 #define kryptonite_HGConstants_h
 
-#define PARSE_APP_ID @"hlnaw8plX3JJ6G5q6MFgFVqBFw0CMIF9571Rc9cF"
-#define PARSE_CLIENT_KEY @"PXSEx7m4ESKOkRmGwpeW5faoupX0RZkMNdRNgyvf"
+#define HGParseAppId @"1znInkUwxEU1tSd7Ee7SX9WL9c3whQXh4esOLREB"
+#define HGParseClientKey @"P6OE25o56OdK6IS8NBhophD4XSFfwriypK8802Ue"
+
+#define HGIncidentNotification @"HGIncidentNotification"
+#define HGIncidentNotificationForeground @"HGIncidentNotificationForeground"
 
 #endif

@@ -6,6 +6,18 @@
 // project.
 
 
+// BlockAlertsAnd-ActionSheets
+#define COCOAPODS_POD_AVAILABLE_BlockAlertsAnd_ActionSheets
+#define COCOAPODS_VERSION_MAJOR_BlockAlertsAnd_ActionSheets 1
+#define COCOAPODS_VERSION_MINOR_BlockAlertsAnd_ActionSheets 0
+#define COCOAPODS_VERSION_PATCH_BlockAlertsAnd_ActionSheets 5
+
+// BlockAlertsAnd-ActionSheets/TableAlertView
+#define COCOAPODS_POD_AVAILABLE_BlockAlertsAnd_ActionSheets_TableAlertView
+#define COCOAPODS_VERSION_MAJOR_BlockAlertsAnd_ActionSheets_TableAlertView 1
+#define COCOAPODS_VERSION_MINOR_BlockAlertsAnd_ActionSheets_TableAlertView 0
+#define COCOAPODS_VERSION_PATCH_BlockAlertsAnd_ActionSheets_TableAlertView 5
+
 // Facebook-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
@@ -17,4 +29,10 @@
 #define COCOAPODS_VERSION_MAJOR_Parse 1
 #define COCOAPODS_VERSION_MINOR_Parse 2
 #define COCOAPODS_VERSION_PATCH_Parse 9
+
+// PhoneNumberFormatter
+#define COCOAPODS_POD_AVAILABLE_PhoneNumberFormatter
+#define COCOAPODS_VERSION_MAJOR_PhoneNumberFormatter 0
+#define COCOAPODS_VERSION_MINOR_PhoneNumberFormatter 1
+#define COCOAPODS_VERSION_PATCH_PhoneNumberFormatter 0
 

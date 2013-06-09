@@ -1,13 +1,21 @@
 PODS:
+  - BlockAlertsAnd-ActionSheets (1.0.5):
+    - BlockAlertsAnd-ActionSheets/TableAlertView
+  - BlockAlertsAnd-ActionSheets/TableAlertView (1.0.5)
   - Facebook-iOS-SDK (3.5.1)
   - Parse (1.2.9):
     - Facebook-iOS-SDK (~> 3.5.1)
+  - PhoneNumberFormatter (0.1.0)
 
 DEPENDENCIES:
+  - BlockAlertsAnd-ActionSheets (~> 1.0.5)
   - Parse (~> 1.2.9)
+  - PhoneNumberFormatter
 
 SPEC CHECKSUMS:
+  BlockAlertsAnd-ActionSheets: 34d4608673b6787ca4835d70913f473919b83aa5
   Facebook-iOS-SDK: 0dbd897e842cefeb012ec2eb8eba659ba6b96b12
   Parse: 9d763110e8cebe319243ee38dc3c34d3475b98d6
+  PhoneNumberFormatter: a3493e52d2cb144d7aec4a3c9d28d18a4744df0d
 
 COCOAPODS: 0.20.2

@@ -9,34 +9,28 @@
 #import "HGAppDelegate.h"
 #import <Parse/Parse.h>
 
-@interface HGAppDelegate ()
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@interface HGAppDelegate()
+@property (nonatomic, strong) NSDictionary *pushPayload;
 @end
 
 @implementation HGAppDelegate
 
-- (CLLocationManager *)locationManager {
-    if (!_locationManager)
-        _locationManager = [[CLLocationManager alloc] init];
-    return _locationManager;
-}
-
-- (void)startSignificantChangeUpdates {
-    self.locationManager.delegate = self;
-    [self.locationManager startMonitoringSignificantLocationChanges];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [Parse setApplicationId:PARSE_APP_ID
-                  clientKey:PARSE_CLIENT_KEY];
+    [Parse setApplicationId:HGParseAppId
+                  clientKey:HGParseClientKey];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    self.pushPayload = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     return YES;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    if (application.applicationState == UIApplicationStateBackground) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:HGIncidentNotification object:self userInfo:userInfo];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:HGIncidentNotificationForeground object:self userInfo:userInfo];
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -71,28 +65,16 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if (self.pushPayload) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:HGIncidentNotification object:self userInfo:self.pushPayload];
+        self.pushPayload = nil;
+    }
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-# pragma mark - CLLocationManagerDelegate methods
-
-// Delegate method from the CLLocationManagerDelegate protocol.
-- (void)locationManager:(CLLocationManager *)manager
-     didUpdateLocations:(NSArray *)locations {
-    // If it's a relatively recent event, turn off updates to save power
-    CLLocation* location = [locations lastObject];
-    NSDate* eventDate = location.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (abs(howRecent) < 15.0) {
-        // If the event is recent, do something with it.
-        NSLog(@"latitude %+.6f, longitude %+.6f\n",
-              location.coordinate.latitude,
-              location.coordinate.longitude);
-    }
-}
 @end
