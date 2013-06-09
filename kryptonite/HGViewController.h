@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HGViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface HGViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *welcomeImage;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

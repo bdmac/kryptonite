@@ -22,6 +22,11 @@
 		019DFFF61763F4D000C51E90 /* kryptonite.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 019DFFF51763F4D000C51E90 /* kryptonite.jpg */; };
 		019DFFF81763F60C00C51E90 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019DFFF71763F60C00C51E90 /* CoreLocation.framework */; };
 		019DFFFE1763FCF800C51E90 /* 57px.png in Resources */ = {isa = PBXBuildFile; fileRef = 019DFFFD1763FCF800C51E90 /* 57px.png */; };
+		01F103561764E985006071B2 /* HGIncidentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F103551764E985006071B2 /* HGIncidentView.m */; };
+		01F103591764F312006071B2 /* icon-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F103571764F312006071B2 /* icon-clock.png */; };
+		01F1035A1764F312006071B2 /* icon-clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F103581764F312006071B2 /* icon-clock@2x.png */; };
+		01F1035D1764FBDB006071B2 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F1035B1764FBDB006071B2 /* warning.png */; };
+		01F1035E1764FBDB006071B2 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F1035C1764FBDB006071B2 /* warning@2x.png */; };
 		8CBA106438DF4564B6CCEA60 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F14A0BD0AA4E30BB256EF4 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +52,12 @@
 		019DFFF71763F60C00C51E90 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		019DFFFD1763FCF800C51E90 /* 57px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57px.png; sourceTree = "<group>"; };
 		019DFFFF1763FD0000C51E90 /* 114px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114px.png; sourceTree = "<group>"; };
+		01F103541764E985006071B2 /* HGIncidentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGIncidentView.h; sourceTree = "<group>"; };
+		01F103551764E985006071B2 /* HGIncidentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGIncidentView.m; sourceTree = "<group>"; };
+		01F103571764F312006071B2 /* icon-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-clock.png"; path = "Assets/icon-clock.png"; sourceTree = "<group>"; };
+		01F103581764F312006071B2 /* icon-clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-clock@2x.png"; path = "Assets/icon-clock@2x.png"; sourceTree = "<group>"; };
+		01F1035B1764FBDB006071B2 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = warning.png; path = Assets/warning.png; sourceTree = "<group>"; };
+		01F1035C1764FBDB006071B2 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "warning@2x.png"; path = "Assets/warning@2x.png"; sourceTree = "<group>"; };
 		BD3BB7C48EC04A9FA93FB6E3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D8F14A0BD0AA4E30BB256EF4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -110,6 +121,8 @@
 				019DFFEB1763EFDE00C51E90 /* HGViewController.m */,
 				019DFFD61763EFDE00C51E90 /* Supporting Files */,
 				019D00011763FE1000C51E90 /* HGConstants.h */,
+				01F103541764E985006071B2 /* HGIncidentView.h */,
+				01F103551764E985006071B2 /* HGIncidentView.m */,
 			);
 			path = kryptonite;
 			sourceTree = "<group>";
@@ -131,6 +144,10 @@
 		019DFFF41763F4C800C51E90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				01F1035B1764FBDB006071B2 /* warning.png */,
+				01F1035C1764FBDB006071B2 /* warning@2x.png */,
+				01F103571764F312006071B2 /* icon-clock.png */,
+				01F103581764F312006071B2 /* icon-clock@2x.png */,
 				019DFFF51763F4D000C51E90 /* kryptonite.jpg */,
 			);
 			name = Assets;
@@ -198,6 +215,10 @@
 				019DFFF61763F4D000C51E90 /* kryptonite.jpg in Resources */,
 				019DFFFE1763FCF800C51E90 /* 57px.png in Resources */,
 				019D00001763FD0000C51E90 /* 114px.png in Resources */,
+				01F103591764F312006071B2 /* icon-clock.png in Resources */,
+				01F1035A1764F312006071B2 /* icon-clock@2x.png in Resources */,
+				01F1035D1764FBDB006071B2 /* warning.png in Resources */,
+				01F1035E1764FBDB006071B2 /* warning@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +263,7 @@
 				019DFFDC1763EFDE00C51E90 /* main.m in Sources */,
 				019DFFE01763EFDE00C51E90 /* HGAppDelegate.m in Sources */,
 				019DFFEC1763EFDE00C51E90 /* HGViewController.m in Sources */,
+				01F103561764E985006071B2 /* HGIncidentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +343,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "882D011F-41F9-47F4-B3DC-FE042086B15A";
+				PROVISIONING_PROFILE = "ED967E0B-6B8A-48FE-861A-42EA5E2BD02C";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

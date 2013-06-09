@@ -11,13 +11,23 @@
 #import <Parse/Parse.h>
 #import "BlockAlertView.h"
 #import "PhoneNumberFormatter.h"
+#import "HGIncidentView.h"
+#import "SORelativeDateTransformer.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HGViewController ()
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) id receiveRemoteNotification;
+@property (nonatomic, assign) id didEnterBackgroundNotification;
+@property (nonatomic, assign) id willEnterForegroundNotification;
+@property (nonatomic, strong) PFGeoPoint *lastLocation;
+@property (nonatomic, strong) NSArray *incidents;
+- (void)startStandardUpdates;
 - (void)startSignificantChangeUpdates;
 - (void)requestPushPrivilege;
-- (void)handleIncidentPush:(NSDictionary *)info;
+- (void)handleIncidentPush:(PFObject *)incident;
+- (void)refreshIncidents;
+- (PFObject *)incidentFromPush:(NSDictionary *)info;
 @end
 
 @implementation HGViewController
@@ -34,18 +44,30 @@
     } else {
         self.welcomeImage.image = [UIImage imageNamed:@"Default"];
     }
+    self.didEnterBackgroundNotification = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:[UIApplication sharedApplication] queue:nil usingBlock:^(NSNotification *notification) {
+        [self startSignificantChangeUpdates];
+    }];
+    self.willEnterForegroundNotification = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication] queue:nil usingBlock:^(NSNotification *notification) {
+        [self startStandardUpdates];
+    }];
     self.receiveRemoteNotification = [[NSNotificationCenter defaultCenter] addObserverForName:HGIncidentNotification object:nil queue:nil usingBlock:^(NSNotification *notification) {
-        [self handleIncidentPush:notification.userInfo];
+        [self handleIncidentPush:[self incidentFromPush:notification.userInfo]];
     }];
     self.receiveRemoteNotification = [[NSNotificationCenter defaultCenter] addObserverForName:HGIncidentNotificationForeground object:nil queue:nil usingBlock:^(NSNotification *notification) {
-        [self handleIncidentPush:notification.userInfo];
+        [self handleIncidentPush:[self incidentFromPush:notification.userInfo]];
     }];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
+    if (self.lastLocation) {
+        [self refreshIncidents];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self requestPushPrivilege];
-    [self startSignificantChangeUpdates];
+    [self startStandardUpdates];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,28 +76,89 @@
     // Dispose of any resources that can be recreated.
 }
 
+# pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView*)collectionView {
+    // _data is a class member variable that contains one array per section.
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.incidents count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *incident = [self.incidents objectAtIndex:indexPath.row];
+    SORelativeDateTransformer *relativeDateTransformer = [[SORelativeDateTransformer alloc] init];
+    NSString *relativeTime = [relativeDateTransformer transformedValue:[incident objectForKey:@"date"]];
+    HGIncidentView* newCell = (HGIncidentView *)[self.collectionView dequeueReusableCellWithReuseIdentifier:@"CellIdentifier" forIndexPath:indexPath];
+    newCell.incidentLabel.text = [incident objectForKey:@"description"];
+    newCell.timeLabel.text = relativeTime;
+    if ([[incident objectForKey:@"phoneNumber"] length] > 0) {
+        newCell.layer.borderColor = [[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0 blue:0.0f alpha:0.9f] CGColor];
+    }
+
+    return newCell;
+}
+
+# pragma mark - UIColledctionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *incident = [self.incidents objectAtIndex:indexPath.row];
+    [self handleIncidentPush:incident];
+}
+
 # pragma mark - Private
 
+- (void)refreshIncidents {
+    PFQuery *query = [PFQuery queryWithClassName:@"Incident"];
+    [query whereKey:@"location" nearGeoPoint:self.lastLocation withinMiles:1.0];
+    [query orderByDescending:@"date"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.incidents = objects;
+        [self.collectionView reloadData];
+    }];
+}
+
 - (CLLocationManager *)locationManager {
-    if (!_locationManager)
+    if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+    }
     return _locationManager;
 }
 
 - (void)startSignificantChangeUpdates {
-    self.locationManager.delegate = self;
+    [self.locationManager stopUpdatingLocation];
     [self.locationManager startMonitoringSignificantLocationChanges];
+}
+
+- (void)startStandardUpdates {
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+    
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    self.locationManager.distanceFilter = 50;
+    
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)requestPushPrivilege {
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
 }
 
-- (void)handleIncidentPush:(NSDictionary *)info {
-    NSLog(@"Got a push notification: %@", info);
-    NSString *message = [[info objectForKey:@"aps"] objectForKey:@"alert"];
-    NSString *referenceId = [info objectForKey:@"reference_id"];
-    NSString *phoneNumber = [info objectForKey:@"phone_number"];
+- (PFObject *)incidentFromPush:(NSDictionary *)info {
+    PFObject *incident = [PFObject objectWithClassName:@"Incident"];
+    [incident setObject:[[info objectForKey:@"aps"] objectForKey:@"alert"] forKey:@"description"];
+    [incident setObject:[info objectForKey:@"reference_id"] forKey:@"incidentNumber"];
+    [incident setObject:[info objectForKey:@"phone_number"] forKey:@"phoneNumber"];
+    return incident;
+}
+
+- (void)handleIncidentPush:(PFObject *)incident {
+    NSLog(@"Got a push notification: %@", incident);
+    NSString *message = [incident objectForKey:@"description"];
+    NSString *referenceId = [incident objectForKey:@"incidentNumber"];
+    NSString *phoneNumber = [incident objectForKey:@"phoneNumber"];
     id rawPhone;
     if (phoneNumber.length > 0) {
         PhoneNumberFormatter *formatter = [[PhoneNumberFormatter alloc] init];
@@ -95,7 +178,7 @@
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
         }];
-        [alert setDestructiveButtonWithTitle:@"Ignore" block:^{
+        [alert setDestructiveButtonWithTitle:@"Cancel" block:^{
         }];
         [alert show];
     }
@@ -122,10 +205,12 @@
               location.coordinate.latitude,
               location.coordinate.longitude);
         PFObject *pfLocation = [PFObject objectWithClassName:@"Location"];
-        [pfLocation setObject:[PFGeoPoint geoPointWithLocation:location] forKey:@"location"];
+        self.lastLocation = [PFGeoPoint geoPointWithLocation:location];
+        [pfLocation setObject:self.lastLocation forKey:@"location"];
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
         [pfLocation setObject:currentInstallation.installationId forKey:@"installation_id"];
         [pfLocation saveInBackground];
+        [self refreshIncidents];
     }
 }
 

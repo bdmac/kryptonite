@@ -13,6 +13,69 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="Mr6-9i-l1Q"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hfz-tV-H4k">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6tC-9g-hWZ">
+                                    <size key="itemSize" width="126" height="130"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellIdentifier" id="pc6-CU-dGj" customClass="HGIncidentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="110" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-2R-Qsh">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="KhT-HO-rtR"/>
+                                                        <constraint firstAttribute="width" constant="110" id="q8K-Wk-Lza"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon-clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="22T-Qc-heQ"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3 days ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OSV-Tb-dGr">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="92" id="R7J-mi-Q6O"/>
+                                                        <constraint firstAttribute="height" constant="21" id="Vjb-Jg-jso"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="warning.png" translatesAutoresizingMaskIntoConstraints="NO" id="tI9-xf-XVj">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Dei-DS-NMu"/>
+                                                        <constraint firstAttribute="width" constant="20" id="RCk-c9-s2F"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="zlU-2R-Qsh" firstAttribute="trailing" secondItem="OSV-Tb-dGr" secondAttribute="trailing" type="default" id="1BC-5R-aCY"/>
+                                            <constraint firstAttribute="bottom" secondItem="22T-Qc-heQ" secondAttribute="bottom" constant="20" type="default" id="4Gy-vf-wBl"/>
+                                            <constraint firstItem="tI9-xf-XVj" firstAttribute="top" secondItem="pc6-CU-dGj" secondAttribute="top" type="default" id="A76-ot-5nB"/>
+                                            <constraint firstItem="OSV-Tb-dGr" firstAttribute="top" secondItem="zlU-2R-Qsh" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PbD-zp-3Fg"/>
+                                            <constraint firstItem="zlU-2R-Qsh" firstAttribute="top" secondItem="pc6-CU-dGj" secondAttribute="top" constant="10" id="XvS-7x-LYC"/>
+                                            <constraint firstItem="zlU-2R-Qsh" firstAttribute="leading" secondItem="22T-Qc-heQ" secondAttribute="leading" type="default" id="eho-c8-EMU"/>
+                                            <constraint firstItem="zlU-2R-Qsh" firstAttribute="centerX" secondItem="pc6-CU-dGj" secondAttribute="centerX" type="default" id="pfp-Aa-d62"/>
+                                            <constraint firstItem="tI9-xf-XVj" firstAttribute="trailing" secondItem="pc6-CU-dGj" secondAttribute="trailing" type="default" id="x0f-w5-F4G"/>
+                                        </constraints>
+                                        <size key="customSize" width="130" height="130"/>
+                                        <connections>
+                                            <outlet property="incidentLabel" destination="zlU-2R-Qsh" id="tf9-Et-80C"/>
+                                            <outlet property="timeLabel" destination="OSV-Tb-dGr" id="gox-SJ-6zE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your location will be used to alert you of crimes and solicit reports." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Z9-gzb">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="cHk-jn-vaJ"/>
@@ -21,29 +84,34 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your privacy is our top concern.  All data collected is anonymous." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-WF-ngN">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your privacy is our top concern.  All data collected is anonymous." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="252" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-WF-ngN">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="CfC-Jr-pwN"/>
+                                    <constraint firstAttribute="width" constant="252" id="Ndf-gi-mXj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Mr6-9i-l1Q" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="28O-SQ-lmH"/>
                             <constraint firstItem="tpi-Z9-gzb" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="6oO-HJ-ndl"/>
-                            <constraint firstAttribute="trailing" secondItem="lIw-WF-ngN" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CUX-8B-sDe"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-20" type="user" id="Ef8-or-VYb"/>
+                            <constraint firstItem="Hfz-tV-H4k" firstAttribute="top" secondItem="tpi-Z9-gzb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Egp-ya-B6r"/>
                             <constraint firstAttribute="bottom" secondItem="lIw-WF-ngN" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="IGp-6M-LZa"/>
                             <constraint firstItem="tpi-Z9-gzb" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Lrq-0w-QV5"/>
-                            <constraint firstItem="lIw-WF-ngN" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="OWb-W8-r0W"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="OoT-JI-ayR"/>
-                            <constraint firstItem="Mr6-9i-l1Q" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="now-GY-piD"/>
+                            <constraint firstItem="lIw-WF-ngN" firstAttribute="centerX" secondItem="Hfz-tV-H4k" secondAttribute="centerX" type="default" id="aCn-2o-2QQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Hfz-tV-H4k" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="oAL-Jb-suf"/>
+                            <constraint firstItem="Hfz-tV-H4k" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sXt-M2-DU5"/>
+                            <constraint firstItem="lIw-WF-ngN" firstAttribute="top" secondItem="Hfz-tV-H4k" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ttr-gd-JQ4"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="yHs-F1-p05"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="Hfz-tV-H4k" id="hJb-25-zEl"/>
                         <outlet property="welcomeImage" destination="Mr6-9i-l1Q" id="ZEE-hj-VFS"/>
                     </connections>
                 </viewController>
@@ -51,15 +119,39 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-clock.png" width="12" height="12"/>
+        <image name="warning.png" width="30" height="30"/>
+    </resources>
     <classes>
+        <class className="HGIncidentView" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HGIncidentView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="incidentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="HGViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HGViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="welcomeImage" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

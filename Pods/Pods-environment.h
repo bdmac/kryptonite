@@ -36,3 +36,9 @@
 #define COCOAPODS_VERSION_MINOR_PhoneNumberFormatter 1
 #define COCOAPODS_VERSION_PATCH_PhoneNumberFormatter 0
 
+// SORelativeDateTransformer
+#define COCOAPODS_POD_AVAILABLE_SORelativeDateTransformer
+#define COCOAPODS_VERSION_MAJOR_SORelativeDateTransformer 1
+#define COCOAPODS_VERSION_MINOR_SORelativeDateTransformer 1
+#define COCOAPODS_VERSION_PATCH_SORelativeDateTransformer 8
+
