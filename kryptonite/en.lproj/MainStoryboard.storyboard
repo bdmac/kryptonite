@@ -15,6 +15,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="Mr6-9i-l1Q"/>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hfz-tV-H4k">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="366" id="P2c-Un-cQT"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6tC-9g-hWZ">
                                     <size key="itemSize" width="126" height="130"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -72,15 +75,17 @@
                                         <connections>
                                             <outlet property="incidentLabel" destination="zlU-2R-Qsh" id="tf9-Et-80C"/>
                                             <outlet property="timeLabel" destination="OSV-Tb-dGr" id="gox-SJ-6zE"/>
+                                            <outlet property="warningImageView" destination="tI9-xf-XVj" id="IIP-c4-Q1B"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your location will be used to alert you of crimes and solicit reports." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Z9-gzb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pw_pattern.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-LI-56g"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your location is used to alert you of nearby crimes and assist investators." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Z9-gzb">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="cHk-jn-vaJ"/>
+                                    <constraint firstAttribute="height" constant="53" id="zpk-eO-UCQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -93,25 +98,49 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1QK-FF-FJn">
+                                <color key="backgroundColor" red="0.40784313725490196" green="0.72156862745098038" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nearby incidents past 24 hours." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-ry-Fhk">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="TF3-rq-Qcz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WDf-ry-Fhk" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="0Z6-nW-tgg"/>
+                            <constraint firstItem="Vm0-LI-56g" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="1Dj-rd-xQz"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="28O-SQ-lmH"/>
+                            <constraint firstItem="1QK-FF-FJn" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="3ws-Tn-w2x"/>
+                            <constraint firstItem="1QK-FF-FJn" firstAttribute="top" secondItem="Vm0-LI-56g" secondAttribute="top" type="default" id="6k9-uV-rMB"/>
                             <constraint firstItem="tpi-Z9-gzb" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="6oO-HJ-ndl"/>
+                            <constraint firstItem="lIw-WF-ngN" firstAttribute="top" secondItem="1QK-FF-FJn" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="7Tb-E1-AeZ"/>
+                            <constraint firstItem="WDf-ry-Fhk" firstAttribute="top" secondItem="tpi-Z9-gzb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DOF-iG-X80"/>
+                            <constraint firstItem="Vm0-LI-56g" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="Dtr-X6-Rea"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-20" type="user" id="Ef8-or-VYb"/>
-                            <constraint firstItem="Hfz-tV-H4k" firstAttribute="top" secondItem="tpi-Z9-gzb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Egp-ya-B6r"/>
-                            <constraint firstAttribute="bottom" secondItem="lIw-WF-ngN" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="IGp-6M-LZa"/>
+                            <constraint firstItem="Hfz-tV-H4k" firstAttribute="top" secondItem="3" secondAttribute="top" constant="107" id="FzO-Ha-Pil"/>
+                            <constraint firstItem="lIw-WF-ngN" firstAttribute="top" secondItem="Hfz-tV-H4k" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="H2W-tA-shA"/>
                             <constraint firstItem="tpi-Z9-gzb" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Lrq-0w-QV5"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="OoT-JI-ayR"/>
-                            <constraint firstItem="lIw-WF-ngN" firstAttribute="centerX" secondItem="Hfz-tV-H4k" secondAttribute="centerX" type="default" id="aCn-2o-2QQ"/>
+                            <constraint firstAttribute="trailing" secondItem="WDf-ry-Fhk" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Poa-ep-lE0"/>
+                            <constraint firstItem="1QK-FF-FJn" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="S1Q-Gd-Ysd"/>
+                            <constraint firstItem="1QK-FF-FJn" firstAttribute="centerX" secondItem="lIw-WF-ngN" secondAttribute="centerX" type="default" id="XwG-OF-xLX"/>
+                            <constraint firstItem="Vm0-LI-56g" firstAttribute="centerY" secondItem="lIw-WF-ngN" secondAttribute="centerY" type="default" id="guX-Ph-ZFS"/>
                             <constraint firstAttribute="trailing" secondItem="Hfz-tV-H4k" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="oAL-Jb-suf"/>
+                            <constraint firstItem="Vm0-LI-56g" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="qWP-oa-6kS"/>
+                            <constraint firstAttribute="trailing" secondItem="tpi-Z9-gzb" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="r5S-jG-IBV"/>
                             <constraint firstItem="Hfz-tV-H4k" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sXt-M2-DU5"/>
-                            <constraint firstItem="lIw-WF-ngN" firstAttribute="top" secondItem="Hfz-tV-H4k" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ttr-gd-JQ4"/>
                             <constraint firstItem="Mr6-9i-l1Q" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="yHs-F1-p05"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Hfz-tV-H4k" id="hJb-25-zEl"/>
+                        <outlet property="footerImageView" destination="Vm0-LI-56g" id="UR6-gA-9gJ"/>
+                        <outlet property="incidentsLabel" destination="WDf-ry-Fhk" id="aBz-EI-Uyq"/>
                         <outlet property="welcomeImage" destination="Mr6-9i-l1Q" id="ZEE-hj-VFS"/>
                     </connections>
                 </viewController>
@@ -121,7 +150,8 @@
     </scenes>
     <resources>
         <image name="icon-clock.png" width="12" height="12"/>
-        <image name="warning.png" width="30" height="30"/>
+        <image name="pw_pattern.png" width="188" height="188"/>
+        <image name="warning.png" width="60" height="60"/>
     </resources>
     <classes>
         <class className="HGIncidentView" superclassName="UICollectionViewCell">
@@ -129,12 +159,15 @@
             <relationships>
                 <relationship kind="outlet" name="incidentLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="warningImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="HGViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HGViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="footerImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="incidentsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="welcomeImage" candidateClass="UIImageView"/>
             </relationships>
         </class>

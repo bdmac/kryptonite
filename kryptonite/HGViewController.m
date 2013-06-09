@@ -96,6 +96,11 @@
     newCell.timeLabel.text = relativeTime;
     if ([[incident objectForKey:@"phoneNumber"] length] > 0) {
         newCell.layer.borderColor = [[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0 blue:0.0f alpha:0.9f] CGColor];
+        newCell.warningImageView.hidden = NO;
+    }
+    else {
+        newCell.layer.borderColor = [[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.9f] CGColor];
+        newCell.warningImageView.hidden = YES;
     }
 
     return newCell;
@@ -111,11 +116,20 @@
 # pragma mark - Private
 
 - (void)refreshIncidents {
+    self.incidentsLabel.text = @"Finding incidents...";
     PFQuery *query = [PFQuery queryWithClassName:@"Incident"];
     [query whereKey:@"location" nearGeoPoint:self.lastLocation withinMiles:1.0];
+    NSDate *yesterday = [[NSDate date] dateByAddingTimeInterval:-86400];
+    [query whereKey:@"date" greaterThanOrEqualTo:yesterday];
     [query orderByDescending:@"date"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.incidents = objects;
+        if (self.incidents.count > 0) {
+            self.incidentsLabel.text = @"Nearby incidents within 24 hours.";
+        }
+        else {
+            self.incidentsLabel.text = @"No recent nearby incidents to show.";
+        }
         [self.collectionView reloadData];
     }];
 }

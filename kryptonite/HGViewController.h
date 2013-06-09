@@ -12,4 +12,6 @@
 @interface HGViewController : UIViewController <CLLocationManagerDelegate, UIAlertViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *welcomeImage;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UIImageView *footerImageView;
+@property (strong, nonatomic) IBOutlet UILabel *incidentsLabel;
 @end

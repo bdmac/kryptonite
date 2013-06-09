@@ -11,5 +11,6 @@
 @interface HGIncidentView : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UILabel *incidentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *warningImageView;
 
 @end
